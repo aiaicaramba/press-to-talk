@@ -12,4 +12,4 @@
 We warmly welcome contributions from the community. If you're interested in enhancing "Press to Talk" with new features, improving the codebase, or fixing bugs, please check out our `CONTRIBUTING.md` for guidelines on how to get involved.
 
 ## Contact Information
-For any inquiries or further information, feel free to contact Leon van Bokhorst and Coen Crombach at Fontys University of Applied Sciences - FICT, Eindhoven. Your feedback is invaluable in making "Press to Talk" a better tool for journalists everywhere.
+For any inquiries or further information, feel free to contact Leon van Bokhorst and Coen Crombach at Fontys University of Applied Sciences - FICT, Eindhoven. Your feedback is invaluable in making "Press to Talk" a better tool for journalists everywhere.## Installation```stMetacello new	repository: 'github://aiaicaramba/press-to-talk:xx-sem1-gen-poc/src';	baseline: 'PressToTalk';	load```
