@@ -1,5 +1,7 @@
 # Energy Colors
 
+![](energy-colors.webp)
+
 ## 🔵 Cool Blue
 
 **What are the characteristics of this colour energy?**  
