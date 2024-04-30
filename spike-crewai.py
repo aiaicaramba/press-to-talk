@@ -5,7 +5,7 @@
 import os
 import getpass
 
-os.environ['OPENAI_API_KEY'] = getpass.getpass("OPENAI_API_KEY")
+#os.environ['OPENAI_API_KEY'] = getpass.getpass("OPENAI_API_KEY")
 #os.environ["SERPER_API_KEY"] = getpass.getpass("SERPER_API_KEY") # serper.dev API key for Google Searches
 
 
@@ -13,6 +13,15 @@ from crewai import Agent
 from crewai_tools import SerperDevTool
 
 #search_tool = SerperDevTool()
+
+# --------------------------------------------------------------
+
+interest_of_user = input("What are your interests and hobbies?")
+print(f"Your interests are: {interest_of_user}")
+
+# --------------------------------------------------------------
+
+
 
 # Creating a senior researcher agent with memory and verbose mode
 mediator = Agent(
@@ -27,7 +36,8 @@ mediator = Agent(
         "It is nice if you can make up a challenge that invites to think about ICT in the most broad sense!"
     ),
     tools=[],
-    allow_delegation=True
+    allow_delegation=True,
+    openai_api_key=os.environ['OPENAI_API_KEY']
 )
 
 # Creating a writer agent with custom tools and delegation capability
@@ -87,8 +97,8 @@ ask_for_interests_task = Task(
 )
 
 
-
 from crewai import Crew, Process
+
 
 # Forming the tech-focused crew with enhanced configurations
 crew = Crew(
@@ -102,7 +112,8 @@ crew = Crew(
 
 # Starting the task execution process with enhanced feedback
 result = crew.kickoff(inputs=
-{'theme': 'AI in journalism', 'layers': ['ICT & Software Engineering','ICT & Business', 'ICT & AI']})
+    {'theme': f"interest_of_user", 
+     'layers': ['ICT & Software Engineering','ICT & Business', 'ICT & AI']})
 print(result)
 
 
