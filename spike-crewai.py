@@ -103,7 +103,7 @@ write_task = Task(
         "This challenge should be easy to understand, engaging, motivating to learn new technology."
         f"Use template: <<<{project_template}>>> and example <<<{project_example}>>>."
     ),
-    expected_output='The challenge written in markdown, using the template.',
+    expected_output=f"The challenge written in markdown, using this template: <<<{project_template}>>>",
     tools=[],
     agent=writer,
     async_execution=False,
