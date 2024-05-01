@@ -12,18 +12,42 @@ import getpass
 from crewai import Agent
 from crewai_tools import SerperDevTool
 
+# ollama 
+from langchain_community.llms import Ollama
+ollama_model    = Ollama(model="phi3")
+
 #search_tool = SerperDevTool()
 
+
+
+def ReadEntireFile(file_name):
+    with open(file_name, "r") as file:
+        data = file.read()
+    return data
+# -----------User Q & A
 # --------------------------------------------------------------
 
-interest_of_user = input("What are your interests and hobbies?")
+print("Welcome to the Fontys ICT sem1 Challenge Generator!")
+interest_of_user = input("What are your interests and hobbies? ")
 print(f"Your interests are: {interest_of_user}")
 
+
+# -----------    Templates and examples.
 # --------------------------------------------------------------
 
+project_template = ReadEntireFile("proj_Template.md")
+project_example = ReadEntireFile("proj_Example.md")
+
+print("----------------------")
+print(project_template)
+print("----------------------")
+print(project_example)
+print("----------------------")
 
 
-# Creating a senior researcher agent with memory and verbose mode
+
+# Creating a senior researcher agent with memory 
+# --------------------------------------------------------------
 mediator = Agent(
     role='Ideator',
     goal='Make up challenging, broad Challenges for students to orient in the broad field of ICT.',
@@ -37,7 +61,7 @@ mediator = Agent(
     ),
     tools=[],
     allow_delegation=True,
-    openai_api_key=os.environ['OPENAI_API_KEY']
+    llm=ollama_model
 )
 
 # Creating a writer agent with custom tools and delegation capability
@@ -52,7 +76,8 @@ writer = Agent(
         "Being a Dutch HBO (Hoger Beroeps Onderwijs) for ICT, we adhere to the HBO-i-framework, which you can find at https://www.hbo-i.nl ."
     ),
     tools=[],
-    allow_delegation=False
+    allow_delegation=False,
+    llm=ollama_model
 )
 
 
@@ -73,12 +98,12 @@ make_up_challenge_task  = Task(
 # Writing task with language model configuration
 write_task = Task(
     description=(
-        "Write an insightful challenge on {theme}."
+        "Write an insightful challenge on <<<{theme}>>>."
         "Focus on current trends."
         "This challenge should be easy to understand, engaging, motivating to learn new technology."
-        "Use the file 'proj_Template.md' as a template and file 'proj_Example.md' as an example."
+        f"Use template: <<<{project_template}>>> and example <<<{project_example}>>>."
     ),
-    expected_output='An article using markdown as format about {theme} advancements.',
+    expected_output='The challenge written in markdown, using the template.',
     tools=[],
     agent=writer,
     async_execution=False,
@@ -103,7 +128,7 @@ from crewai import Crew, Process
 # Forming the tech-focused crew with enhanced configurations
 crew = Crew(
     agents=[mediator, writer],
-    tasks=[ask_for_interests_task] #, make_up_challenge_task, write_task]
+    tasks=[ask_for_interests_task , make_up_challenge_task, write_task]
     ,
     process=Process.sequential  # Optional: Sequential task execution is default
 )
@@ -112,7 +137,7 @@ crew = Crew(
 
 # Starting the task execution process with enhanced feedback
 result = crew.kickoff(inputs=
-    {'theme': f"interest_of_user", 
+    {'theme': interest_of_user, 
      'layers': ['ICT & Software Engineering','ICT & Business', 'ICT & AI']})
 print(result)
 
