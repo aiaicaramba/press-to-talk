@@ -14,7 +14,15 @@ from crewai_tools import SerperDevTool
 
 # ollama 
 from langchain_community.llms import Ollama
+from crewai import Task
+from crewai import Crew, Process
+
+
+
 ollama_model    = Ollama(model="phi3")
+
+
+llm=ollama_model   # introduced to be able to switch easy between llm's.
 
 #search_tool = SerperDevTool()
 
@@ -38,11 +46,11 @@ print(f"Your interests are: {interest_of_user}")
 project_template = ReadEntireFile("proj_Template.md")
 project_example = ReadEntireFile("proj_Example.md")
 
-print("----------------------")
-print(project_template)
-print("----------------------")
-print(project_example)
-print("----------------------")
+#print("----------------------")
+#print(project_template)
+#print("----------------------")
+#print(project_example)
+#print("----------------------")
 
 
 
@@ -60,7 +68,7 @@ mediator = Agent(
         "It is nice if you can make up a challenge that invites to think about ICT in the most broad sense!"
     ),
     tools=[],
-    allow_delegation=True,
+    allow_delegation=False,
     llm=ollama_model
 )
 
@@ -82,53 +90,40 @@ writer = Agent(
 
 
 
-from crewai import Task
 
 # Research task
-make_up_challenge_task  = Task(
+write_task  = Task(
     description=(
-        "Make up a broad Challenge for students to orient in the broad field of ICT."
-
+        "Write the challenge for students to markdown file. "
+        f"Use this template: <<<{project_template}>>>, and example <<<{project_example}>>>"
     ),
     expected_output='A comprehensive challenge description.',
     tools=[],
-    agent=mediator,
-)
-
-# Writing task with language model configuration
-write_task = Task(
-    description=(
-        "Write an insightful challenge on <<<{theme}>>>."
-        "Focus on current trends."
-        "This challenge should be easy to understand, engaging, motivating to learn new technology."
-        f"Use template: <<<{project_template}>>> and example <<<{project_example}>>>."
-    ),
-    expected_output=f"The challenge written in markdown, using this template: <<<{project_template}>>>",
-    tools=[],
     agent=writer,
-    async_execution=False,
     output_file="generated/proj_Gen.md" 
 )
 
-ask_for_interests_task = Task(
+
+make_up_challenge_task = Task(
     description=(
-        "Discuss with the student their interests and hobbies, and try to find a theme that motivates them."
+        f"The interests and hobbies of a student are {interest_of_user}. Make up a Challenge for this student."
+        f"A challenging and motivating Challenge for a student. Format the challenge exactly like this: <<<{project_template}>>>"
+        
     ),
-    expected_output='A theme that motivates the student.',
+    expected_output="An  interesting challenge for a student.",
     tools=[],
     agent=mediator,
     async_execution=False,
-    human_input=True
+    human_input=False,
 )
 
 
-from crewai import Crew, Process
 
 
 # Forming the tech-focused crew with enhanced configurations
 crew = Crew(
     agents=[mediator, writer],
-    tasks=[ask_for_interests_task , make_up_challenge_task, write_task]
+    tasks=[make_up_challenge_task, write_task]
     ,
     process=Process.sequential  # Optional: Sequential task execution is default
 )
@@ -138,7 +133,9 @@ crew = Crew(
 # Starting the task execution process with enhanced feedback
 result = crew.kickoff(inputs=
     {'theme': interest_of_user, 
-     'layers': ['ICT & Software Engineering','ICT & Business', 'ICT & AI']})
+     'layers': ['ICT & Software Engineering','ICT & Business', 'ICT & AI']
+    })
+
 print(result)
 
 
