@@ -107,7 +107,7 @@ write_task  = Task(
 make_up_challenge_task = Task(
     description=(
         f"The interests and hobbies of a student are {interest_of_user}. Make up a Challenge for this student."
-        f"A challenging and motivating Challenge for a student. Format the challenge exactly like this: <<<{project_template}>>>"
+        f"A challenging and motivating Challenge for a student. Format the challenge exactly like this: {project_template}"
         
     ),
     expected_output="An  interesting challenge for a student.",
