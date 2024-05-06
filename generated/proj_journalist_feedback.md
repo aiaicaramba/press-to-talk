@@ -1,4 +1,5 @@
 
+Feedback on: [[proj_journalist]]
 # AI in Journalism Challenge
 
 ## Background

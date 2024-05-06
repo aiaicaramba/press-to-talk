@@ -13,4 +13,15 @@ We warmly welcome contributions from the community. If you're interested in enha
 ## Contact Information
 For any inquiries or further information, feel free to contact Leon van Bokhorst and Coen Crombach at Fontys University of Applied Sciences - FICT, Eindhoven. Your feedback is invaluable in making "Press to Talk" a better tool for journalists everywhere.## Installation
 
+# (Feedback on) Generated projects
+
+- [[proj_AI_Journalist_revolution_feedback]]
+- [[proj_escape_room_feedback]]
+- [[proj_journalist_feedback]]
+- [[proj_soccer_feedback]]
+- [[proj_Water_sport_feedback]]
+
+
+
+
 
