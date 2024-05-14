@@ -1,4 +1,5 @@
-Feedback on: [[proj_AI_Journalist_revolution]]
+- Feedback on: [[proj_AI_Journalist_revolution]]
+- LLM: local: ollama phi3
 
 The Challenge Name: AI Journalism Revolution 
 

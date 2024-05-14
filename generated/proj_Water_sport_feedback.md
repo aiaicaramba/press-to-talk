@@ -1,4 +1,5 @@
-Feedback on: [[proj_Water_sport]]
+- Feedback on: [[proj_Water_sport]]
+- LLM: local: ollama phi3
 
 Project Title: AI Surf Assistant - An Innovative ICT Solution for Surfers
 

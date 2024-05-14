@@ -1,5 +1,6 @@
-Feedback on: [[proj_soccer]]
-
+- Feedback on: [[proj_soccer]]
+- LLM: local: ollama phi3
+  
 Soccer Innovators Project Challenge for Fontys ICT Semester 1 Students
 
 ## Organisation/Company: Everlast Agro B.V. (imaginary)

@@ -1,5 +1,7 @@
 
-Feedback on: [[proj_journalist]]
+- Feedback on: [[proj_journalist]]
+- LLM: local: ollama phi3
+
 # AI in Journalism Challenge
 
 ## Background

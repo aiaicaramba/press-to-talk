@@ -1,4 +1,5 @@
-Feedback on: [[proj_escape_room]]
+- Feedback on: [[proj_escape_room]]
+- LLM: local: ollama phi3
 
 A comprehensive project outline for the "Innovative Agro Escape Challenge" involves dividing the 4-week duration into phases and assigning roles accordingly to leverage students' skills in alignment with learning outcomes LO3 and LO4. Here is a proposed team structure:
 

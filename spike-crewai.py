@@ -18,7 +18,7 @@ from crewai import Task
 from crewai import Crew, Process
 
 
-
+# Local model
 ollama_model    = Ollama(model="phi3")
 
 
