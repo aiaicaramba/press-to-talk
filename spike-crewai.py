@@ -18,11 +18,13 @@ from crewai import Task
 from crewai import Crew, Process
 
 
-# Local model
-ollama_model    = Ollama(model="phi3")
+local_llm=True
+if local_llm:
+    llm    = Ollama(model="phi3")
+else:
+    llm = Ollama(model="gpt-3.5-turbo")
+    os.environ['OPENAI_API_KEY'] = getpass.getpass("OPENAI_API")
 
-
-llm=ollama_model   # introduced to be able to switch easy between llm's.
 
 #search_tool = SerperDevTool()
 
